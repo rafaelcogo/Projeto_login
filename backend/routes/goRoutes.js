@@ -1,0 +1,24 @@
+const express = require("express");
+const router = express.Router();
+const {
+  getGoals,
+  setGoal,
+  updateGoal,
+  deleteGoal,
+} = require("../controllers/goalController");
+
+// Rotas simples, pois usam o mesmo caminho para GET e Post
+router.route("/").get(getGoals).post(setGoal);
+
+// Essas 2 rotas foram atualizadas para ficar em apenas uma linha
+// router.get("/", getGoals);
+// router.post("/", setGoal);
+
+// Rotas simples, pois usam o mesmo caminho "/:id" para Updte e Delete
+router.route("/:id").delete(deleteGoal).put(updateGoal);
+
+// Essas 2 rotas foram atualizadas para ficar em apenas uma linha
+// router.put("/:id", updateGoal);
+// router.delete("/:id", deleteGoal);
+
+module.exports = router;
