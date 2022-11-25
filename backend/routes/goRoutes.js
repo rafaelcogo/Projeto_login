@@ -7,15 +7,17 @@ const {
   deleteGoal,
 } = require("../controllers/goalController");
 
+const { protect } = require("../middleware/authMiddleware");
+
 // Rotas simples, pois usam o mesmo caminho para GET e Post
-router.route("/").get(getGoals).post(setGoal);
+router.route("/").get(protect, getGoals).post(protect, setGoal);
 
 // Essas 2 rotas foram atualizadas para ficar em apenas uma linha
 // router.get("/", getGoals);
 // router.post("/", setGoal);
 
 // Rotas simples, pois usam o mesmo caminho "/:id" para Updte e Delete
-router.route("/:id").delete(deleteGoal).put(updateGoal);
+router.route("/:id").delete(protect, deleteGoal).put(protect, updateGoal);
 
 // Essas 2 rotas foram atualizadas para ficar em apenas uma linha
 // router.put("/:id", updateGoal);
